@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity(), PermissionUtils.PermissionGrant {
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(objectAnimator1, objectAnimator2)
         animatorSet.interpolator = AccelerateInterpolator()
-        animatorSet.duration = 2000
+        animatorSet.duration = 10
         animatorSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
 

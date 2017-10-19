@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -20,12 +22,50 @@ import com.nzf.markdown.utils.FileUtils
 import com.nzf.markdown.view.MaterialMenuDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.localhost){
+            if(item.itemId == currentMenuId){
+                return false
+            }
+            currentMenuId = item.itemId
+            dl_main_body.closeDrawer(GravityCompat.START)
+            return true
+        }
+
+        if(onOptionsItemSelected(item)){
+            dl_main_body.closeDrawer(GravityCompat.START)
+        }
+        return false
+    }
+
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.localhost,
+
+            R.id.other,
+
+            R.id.menu_helper,
+
+            R.id.menu_update,
+
+            R.id.menu_about ->
+                Toast.makeText(this@MainActivity,"正在开发中...",Toast.LENGTH_SHORT).show()
+        }
+        return true
+
+    }
+
 
     var isOpen: Boolean = false
     var materialMenu: MaterialMenuDrawable? = null
     var exitTime: Long = 0
 
+    var currentMenuId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,9 +81,14 @@ class MainActivity : AppCompatActivity() {
 
     fun initView() {
         initMaterialMenu()
+
+        ll_main_setting.setNavigationItemSelectedListener(this@MainActivity)
+        ll_main_setting.setCheckedItem(R.id.localhost)
+
         var fileUtils = MyApplication().getFileUtils()
         fileUtils.showFileDir(fileUtils.ROOT_PATH!!.path)
     }
+
 
     private fun showAddDailog(mContext: Context) {
         var editText: EditText = EditText(mContext)
@@ -130,7 +175,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //当用户连续按两次返回键的时候弹出是否退出对话框
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (System.currentTimeMillis() - exitTime > 2000) {

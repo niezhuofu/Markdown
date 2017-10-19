@@ -17,35 +17,31 @@
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/dl_main_body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/fl_main_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        </FrameLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.design.widget.NavigationView
             android:id="@+id/ll_main_setting"
             android:layout_width="200dp"
             android:layout_height="match_parent"
+            android:background="#E2FFFFFF"
             android:layout_gravity="start"
-            android:orientation="vertical"
-            android:background="#90000000">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_setting"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
+            android:fitsSystemWindows="true"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:headerLayout="@layout/ngv_header_layout"
+            app:menu="@menu/ngv_main_layout"
+            />
 
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>
+
