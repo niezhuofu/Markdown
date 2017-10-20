@@ -1,4 +1,4 @@
-package com.nzf.markdown.utils
+package com.chad.library.adapter.base.utils
 
 import android.Manifest
 import android.app.Activity
@@ -12,7 +12,7 @@ import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.util.Log
 import android.widget.Toast
-import com.nzf.markdown.R
+import com.chad.library.R
 import java.util.*
 
 /**

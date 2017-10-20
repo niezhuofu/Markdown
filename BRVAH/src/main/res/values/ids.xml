@@ -4,4 +4,8 @@
     <item name="BaseQuickAdapter_swiping_support" type="id"/>
     <item name="BaseQuickAdapter_dragging_support" type="id"/>
     <item name="BaseQuickAdapter_databinding_support" type="id"/>
+    <item name="tag" type="id"/>
+    <item name="statusbar_view" type="id"/>
+    <item name="translucent_view" type="id"/>
+    <item name="id_toolbar" type="id"/>
 </resources>

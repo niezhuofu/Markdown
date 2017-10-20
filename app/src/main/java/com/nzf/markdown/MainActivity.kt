@@ -17,8 +17,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.nzf.markdown.app.MyApplication
-import com.nzf.markdown.utils.FileUtils
+import com.chad.library.adapter.base.app.MyApplication
+import com.chad.library.adapter.base.utils.FileUtils
 import com.nzf.markdown.view.MaterialMenuDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -85,27 +85,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         ll_main_setting.setNavigationItemSelectedListener(this@MainActivity)
         ll_main_setting.setCheckedItem(R.id.localhost)
 
-        var fileUtils = MyApplication().getFileUtils()
+        val fileUtils = MyApplication().getFileUtils()
         fileUtils.showFileDir(fileUtils.ROOT_PATH!!.path)
     }
 
 
     private fun showAddDailog(mContext: Context) {
-        var editText: EditText = EditText(mContext)
-        var addDailog: AlertDialog = AlertDialog.Builder(this)
+        val editText = EditText(mContext)
+        AlertDialog.Builder(this)
                 .setTitle("添加文件夹")
                 .setView(editText)
                 .setPositiveButton("确认", DialogInterface.OnClickListener {
-                    dialog, which ->
+                    _, _ ->
                     if (TextUtils.isEmpty(editText.text.toString().trim())) {
                         Toast.makeText(this, "文件夹名不能为空。", Toast.LENGTH_SHORT).show()
                         return@OnClickListener
                     }
-                    var dirName: String = editText.text.toString().trim()
+                    val dirName: String = editText.text.toString().trim()
 
                     Log.i("Main : = ", MyApplication().getAppContext().toString())
-                    var file: FileUtils = MyApplication().getFileUtils()
-                    var dirSuccess: Boolean = file.newMDDir(dirName)
+                    val file: FileUtils = MyApplication().getFileUtils()
+                    val dirSuccess: Boolean = file.newMDDir(dirName)
                     if (dirSuccess) {
                         Toast.makeText(this, "文件夹创建成功", Toast.LENGTH_SHORT).show()
                     } else {
@@ -117,11 +117,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun initMaterialMenu() {
+    private fun initMaterialMenu() {
         //初始化侧边栏按钮
         materialMenu = MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN)
 
-        tb_main_title.setNavigationIcon(materialMenu)
+        tb_main_title.navigationIcon = materialMenu
         tb_main_title.showOverflowMenu()
         tb_main_title.inflateMenu(R.menu.menu_main)
         tb_main_title.setNavigationOnClickListener {
@@ -147,10 +147,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             return@setOnMenuItemClickListener true
         }
 
+        @Suppress("DEPRECATION")
         dl_main_body.setDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
 
             override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {
-                var slideoff: Float
+                val slideoff: Float
                 if (isOpen) {
                     slideoff = 2 - slideOffset
                 } else {
@@ -178,7 +179,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                val mHelperUtils: Any
                 Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show()
                 exitTime = System.currentTimeMillis()
             } else {
