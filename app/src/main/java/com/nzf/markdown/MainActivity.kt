@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
@@ -19,14 +20,15 @@ import android.widget.EditText
 import android.widget.Toast
 import com.chad.library.adapter.base.app.MyApplication
 import com.chad.library.adapter.base.utils.FileUtils
+import com.nzf.markdown.pizi_sheng.HomeFolderFragment
 import com.nzf.markdown.view.MaterialMenuDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.localhost){
-            if(item.itemId == currentMenuId){
+        if (item.itemId == R.id.localhost) {
+            if (item.itemId == currentMenuId) {
                 return false
             }
             currentMenuId = item.itemId
@@ -34,17 +36,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             return true
         }
 
-        if(onOptionsItemSelected(item)){
+        if (onOptionsItemSelected(item)) {
             dl_main_body.closeDrawer(GravityCompat.START)
         }
         return false
     }
 
 
-
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
+        when (item?.itemId) {
             R.id.localhost,
 
             R.id.other,
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.menu_update,
 
             R.id.menu_about ->
-                Toast.makeText(this@MainActivity,"正在开发中...",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "正在开发中...", Toast.LENGTH_SHORT).show()
         }
         return true
 
@@ -87,6 +87,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fileUtils = MyApplication().getFileUtils()
         fileUtils.showFileDir(fileUtils.ROOT_PATH!!.path)
+
+        changeFragment(HOME_FOLD_FRAGMENT)
+
+    }
+
+
+    private fun changeFragment(fragId: String){
+        curFragment = fragId
+        val beginTransac = supportFragmentManager.beginTransaction()
+        var fragment : Fragment? = supportFragmentManager.findFragmentByTag(curFragment)
+
+        if(fragment == null && HOME_FOLD_FRAGMENT.equals(curFragment) ) {
+            fragment = HomeFolderFragment()
+          beginTransac.replace(R.id.fl_main_contain,fragment, curFragment)
+        }
+
+        beginTransac.commit()
+    }
+
+
+    private var curFragment: String? = null
+
+    companion object {
+        val HOME_FOLD_FRAGMENT: String = "fold_fragment"
+
+
     }
 
 
@@ -95,8 +121,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AlertDialog.Builder(this)
                 .setTitle("添加文件夹")
                 .setView(editText)
-                .setPositiveButton("确认", DialogInterface.OnClickListener {
-                    _, _ ->
+                .setPositiveButton("确认", DialogInterface.OnClickListener { _, _ ->
                     if (TextUtils.isEmpty(editText.text.toString().trim())) {
                         Toast.makeText(this, "文件夹名不能为空。", Toast.LENGTH_SHORT).show()
                         return@OnClickListener
@@ -136,8 +161,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         //添加按钮初始化
-        tb_main_title.setOnMenuItemClickListener {
-            item: MenuItem? ->
+        tb_main_title.setOnMenuItemClickListener { item: MenuItem? ->
             when (item?.itemId) {
                 R.id.item_main_add ->
                     Toast.makeText(this, "add", Toast.LENGTH_LONG).show()
