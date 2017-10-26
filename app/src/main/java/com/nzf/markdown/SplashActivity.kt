@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.AccelerateInterpolator
-import com.nzf.markdown.utils.PermissionUtils
+import com.chad.library.adapter.base.utils.PermissionUtils
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity(), PermissionUtils.PermissionGrant {
@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity(), PermissionUtils.PermissionGrant {
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(objectAnimator1, objectAnimator2)
         animatorSet.interpolator = AccelerateInterpolator()
-        animatorSet.duration = 2000
+        animatorSet.duration = 10
         animatorSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
 
@@ -60,6 +60,7 @@ class SplashActivity : AppCompatActivity(), PermissionUtils.PermissionGrant {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         } else {
+            @Suppress("UNCHECKED_CAST")
             PermissionUtils.requestPermissionsResult(this@SplashActivity, requestCode, permissions as Array<String>, grantResults, this)
         }
     }
