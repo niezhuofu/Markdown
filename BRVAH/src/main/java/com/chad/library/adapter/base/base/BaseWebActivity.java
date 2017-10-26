@@ -321,7 +321,6 @@ public class BaseWebActivity extends BaseToolbarActivity {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
             if (item != null) item.setTitle(this.getString(R.string.menu_web_horizontal));
         }
-//        getResources().updateConfiguration(configuration,null);
     }
 
     @Override
@@ -329,7 +328,6 @@ public class BaseWebActivity extends BaseToolbarActivity {
         getMenuInflater().inflate(R.menu.menu_web, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

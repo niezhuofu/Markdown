@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var fragment : Fragment? = supportFragmentManager.findFragmentByTag(curFragment)
 
         if(fragment == null && HOME_FOLD_FRAGMENT.equals(curFragment) ) {
-            fragment = HomeFolderFragment()
+            fragment = HomeFolderFragment(R.layout.fragment_home_folder)
           beginTransac.replace(R.id.fl_main_contain,fragment, curFragment)
         }
 

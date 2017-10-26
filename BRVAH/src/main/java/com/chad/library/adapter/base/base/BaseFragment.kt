@@ -3,7 +3,6 @@ package com.chad.library.adapter.base.base
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import butterknife.ButterKnife
 import com.chad.library.BuildConfig
 import com.chad.library.adapter.base.app.MyApplication
 import rx.Subscription
@@ -37,14 +36,12 @@ abstract class BaseFragment : BaseStateFragment(), BaseViewInterface, EventInter
                 throw IllegalStateException(this.javaClass.simpleName + ":LayoutID找不到对应的布局")
 
         }
-        ButterKnife.bind(this, rootView!!)
         registerEvent()
         return rootView
     }
 
     override fun onResume() {
         super.onResume()
-        // MobclickAgent.onPageStart(this.getClass().getSimpleName());
         if (isFirstFocused) {
             isFirstFocused = false
             initData()
@@ -53,7 +50,6 @@ abstract class BaseFragment : BaseStateFragment(), BaseViewInterface, EventInter
 
     override fun onPause() {
         super.onPause()
-        // MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     override fun onDestroyView() {
