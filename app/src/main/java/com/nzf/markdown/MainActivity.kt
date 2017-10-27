@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
@@ -20,7 +21,8 @@ import android.widget.EditText
 import android.widget.Toast
 import com.chad.library.adapter.base.app.MyApplication
 import com.chad.library.adapter.base.utils.FileUtils
-import com.nzf.markdown.pizi_sheng.HomeFolderFragment
+import com.nzf.markdown.pizi_sheng.TestFragment
+import com.nzf.markdown.pizi_sheng.UpdateVersionFragment
 import com.nzf.markdown.view.MaterialMenuDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -51,10 +53,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.menu_helper,
 
-            R.id.menu_update,
-
             R.id.menu_about ->
                 Toast.makeText(this@MainActivity, "正在开发中...", Toast.LENGTH_SHORT).show()
+
+            R.id.menu_update ->
+                changeFragment(HOME_UPDATE_VERSION_FRAGMENT)
         }
         return true
 
@@ -95,26 +98,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun changeFragment(fragId: String){
         curFragment = fragId
-        val beginTransac = supportFragmentManager.beginTransaction()
+        beginTransac = supportFragmentManager.beginTransaction()
         var fragment : Fragment? = supportFragmentManager.findFragmentByTag(curFragment)
 
         if(fragment == null && HOME_FOLD_FRAGMENT.equals(curFragment) ) {
-            fragment = HomeFolderFragment(R.layout.fragment_home_folder)
-          beginTransac.replace(R.id.fl_main_contain,fragment, curFragment)
+            fragment = TestFragment()
+          beginTransac?.replace(R.id.fl_main_contain,fragment, curFragment)
         }
 
-        beginTransac.commit()
+        if(fragment == null && HOME_UPDATE_VERSION_FRAGMENT.equals(curFragment)){
+            fragment = UpdateVersionFragment()
+            beginTransac?.replace(R.id.fl_main_contain,fragment,curFragment)
+        }
+
+        beginTransac?.commit()
     }
 
 
+    private var beginTransac: FragmentTransaction? = null
     private var curFragment: String? = null
 
     companion object {
         val HOME_FOLD_FRAGMENT: String = "fold_fragment"
-
-
+        val HOME_UPDATE_VERSION_FRAGMENT: String = "update_version_fragment"
     }
-
 
     private fun showAddDailog(mContext: Context) {
         val editText = EditText(mContext)
