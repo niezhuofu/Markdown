@@ -19,9 +19,9 @@ class UpdateVersionFragment : BaseFragment() {
 
     }
 
-//    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//          val view: View? = inflater?.inflate(R.layout.fragment_home_folder,null)
-//        return view
-//        return super.onCreateView(inflater, container, savedInstanceState)
-    }
+//    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+// inflater?.inflate(R.layout.fragment_home_folder,null)
+
+
+}
 

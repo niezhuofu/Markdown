@@ -92,9 +92,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fileUtils.showFileDir(fileUtils.ROOT_PATH!!.path)
 
         changeFragment(HOME_FOLD_FRAGMENT)
-
     }
-
 
     private fun changeFragment(fragId: String){
         curFragment = fragId
@@ -103,14 +101,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if(fragment == null && HOME_FOLD_FRAGMENT.equals(curFragment) ) {
             fragment = TestFragment()
-          beginTransac?.replace(R.id.fl_main_contain,fragment, curFragment)
         }
 
         if(fragment == null && HOME_UPDATE_VERSION_FRAGMENT.equals(curFragment)){
             fragment = UpdateVersionFragment()
-            beginTransac?.replace(R.id.fl_main_contain,fragment,curFragment)
         }
 
+        beginTransac?.replace(R.id.fl_main_contain,fragment,curFragment)
         beginTransac?.commit()
     }
 
