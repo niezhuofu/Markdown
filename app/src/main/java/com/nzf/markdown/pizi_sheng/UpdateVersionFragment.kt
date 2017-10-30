@@ -11,7 +11,7 @@ class UpdateVersionFragment : BaseFragment() {
 
     override fun getLayoutId() : Int = R.layout.fragment_home_folder
 
-    override fun onCreateAfter(savedInstanceState: Bundle) {
+    override fun onCreateAfter(savedInstanceState: Bundle?) {
 
     }
 

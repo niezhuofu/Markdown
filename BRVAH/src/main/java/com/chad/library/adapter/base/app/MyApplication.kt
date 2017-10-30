@@ -43,7 +43,10 @@ class MyApplication : Application() {
         fileUtils = FileUtils(this)
 
         refWatcher = LeakCanary.install(this@MyApplication)
-        ExceptionHandler.instance.initConfig(mContext as MyApplication)
+        if(!com.chad.library.BuildConfig.DEBUG){
+            ExceptionHandler.instance.initConfig(mContext as MyApplication)
+        }
+
     }
 
     fun getAppContext(): Context = mContext!!

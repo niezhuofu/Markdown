@@ -15,6 +15,7 @@ public class BaseStateFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         if (!restoreStateFromArguments()) {
             onFirstLaunched();
         }
