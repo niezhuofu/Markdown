@@ -20,6 +20,9 @@ class FilesUtils {
     val FILEDIR_EXTERNAL: String = "ExternalFileDir"
     val FILEDIR_INTERNAL: String = "InternalFileDir"
 
+    val FILE_MD: String = "md"
+    val FILE_HTML: String = "html"
+
     constructor() {
         mContext = MDApplication.getContext()
     }
@@ -33,28 +36,57 @@ class FilesUtils {
         }
     }
 
-    fun showAllMDDir(path: String) {
-        Log.i("showAllMDDir","start")
+    /*
+    * 展示所有文件
+    * @params path  需要展示的路径
+    * @return ArrayList<MDFileBean> 当前路径MD文件集合
+    */
+    fun showAllMDDir(path: String): ArrayList<MDFileBean>? {
         var file: File = File(path)
-        var filesList = ArrayList<MDFileBean>()
+        var filesList:java.util.ArrayList<MDFileBean>? = null
 
         var files: Array<File> = file.listFiles()
 
-        for (f in files) {
-            var bean: MDFileBean = MDFileBean()
-            var fileName: String = f.name
-            if (f.isFile) {
-                var tmp: List<String> = fileName.split(".")
-                for (t in tmp) {
-                    Log.i("fileutils", t)
-                }
+        if (files.size != 0) {
+            filesList = ArrayList<MDFileBean>()
+            for (f in files) {
+                var fileBean: MDFileBean? = getMDFile(f)
+                if (fileBean != null)
+                    filesList!!.add(fileBean)
             }
-//            bean.fileName = f.name
-//            bean.filePath = f.path
-//            bean.fileLastTime = f.lastModified()
-//            f.length()
         }
 
+        return filesList
+    }
+
+
+    val FILETYPE_DIR: Int = 0
+    val FILETYPE_MD: Int = 1
+    val FILETYPE_HTML: Int = 2
+
+    fun getMDFile(f: File): MDFileBean? {
+        var bean: MDFileBean? = MDFileBean()
+        var fileName: String = f.name
+
+        bean!!.fileName = f.name
+        bean!!.fileLastTime = f.lastModified()
+        bean!!.fileSize = f.length()
+        bean!!.filePath = f.path
+
+        if (f.isFile) {
+            var tmp: List<String> = fileName.split(".")
+            when (tmp[1]) {
+                FILE_MD -> bean.fileType = FILETYPE_MD
+                FILE_HTML -> bean.fileType = FILETYPE_HTML
+                else -> bean = null
+            }
+        }
+
+        if (f.isDirectory) {
+            bean!!.fileType = FILETYPE_DIR
+        }
+
+        return bean
     }
 
     /*
@@ -63,7 +95,6 @@ class FilesUtils {
     * @params type 需要获取的路径,
     * @return File
     */
-
     fun getFileDirectory(@NotNull path: String, type: String?): File? {
         var mdFileDir: File? = null
         when (path) {
