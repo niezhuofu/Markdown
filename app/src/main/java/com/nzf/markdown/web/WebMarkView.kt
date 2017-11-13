@@ -3,10 +3,8 @@ package com.nzf.markdown.web
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
+import android.widget.Toast
 import java.io.File
 
 /**
@@ -19,34 +17,43 @@ class WebMarkView : WebView{
     constructor(context : Context?,attrs : AttributeSet?) : this(context,attrs,0)
 
     constructor(context : Context?,attrs: AttributeSet?,defStyle:Int):super(context,attrs,defStyle){
-        initData()
+        initData(context)
     }
 
-    private fun initData() {
+
+    class AndroidToast(context: Context) {
+        private var context : Context? = context
+
+        @JavascriptInterface
+        fun show(img : String?){
+            Toast.makeText(context,"打开大图",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun initData(context : Context?) {
         settings.defaultTextEncodingName = "UTF-8"
         settings.javaScriptEnabled = true
 
         webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
+                settings.javaScriptEnabled = true
                 this@WebMarkView.loadUrl(ConstantWeb.getLoadJs(data))
+                this@WebMarkView.loadUrl(ConstantWeb.JS_IMAGE_CLICK_LISTENER)
             }
 
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                settings.javaScriptEnabled = true
                 this@WebMarkView.loadUrl(ConstantWeb.getLoadJs(data))
                 loadDefault()
                 return true
             }
         }
 
-
-        webChromeClient = object : WebChromeClient() {
-
-        }
-
+        webChromeClient = object : WebChromeClient(){}
 
     }
 
-    public var data : String = ""
+    var data : String = ""
 
 
     override fun onSizeChanged(w: Int, h: Int, ow: Int, oh: Int) {
@@ -81,6 +88,4 @@ class WebMarkView : WebView{
     fun loadDefault(){
         loadUrl("file:///android_asset/result.html")
     }
-
-
 }

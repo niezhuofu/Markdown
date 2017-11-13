@@ -19,6 +19,7 @@ class ResultWebViewActivity : AppCompatActivity(),ViewTreeObserver.OnGlobalLayou
         super.onCreate(savedInstanceState)
         mWebView = WebMarkView(this)
         setContentView(mWebView)
+        mWebView!!.addJavascriptInterface(WebMarkView.AndroidToast(this),"AndroidToast")
     }
 
     override fun onResume() {
