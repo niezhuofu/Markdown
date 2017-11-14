@@ -31,7 +31,11 @@ class BigViewerFragment : DialogFragment(){
         val view : View?  = inflater!!.inflate(R.layout.fragment_big_viewer,container,false)
 
         val image = view!!.findViewById<ImageView>(R.id.iv_img)
-        Glide.with(this).load(image_path).into(image)
+
+        Glide.with(this)
+                .load(image_path)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(image)
 
         view.findViewById<ImageView>(R.id.iv_close).setOnClickListener({
             dismiss()
