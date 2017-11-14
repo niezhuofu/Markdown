@@ -1,4 +1,4 @@
-package com.nzf.markdown;
+package com.nzf.markdown.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.nzf.markdown.R;
 import com.nzf.markdown.utils.FilesUtils;
 import com.nzf.markdown.web.ResultWebViewActivity;
 
@@ -21,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
-        String voicePath = "file:///android_asset/README.md";
 
         copyAssetsToDst(this,"","");
 

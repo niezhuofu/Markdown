@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewTreeObserver
+import com.nzf.markdown.view.WebMarkView
 
 /**
  * Created by joseph on 2017/11/11.
