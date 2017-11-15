@@ -1216,8 +1216,8 @@ function marked(src, opt, callback) {
   }
   try {
     if (opt) opt = merge({}, marked.defaults, opt);
-    return Parser.parse(Lexer.lex(src, opt), opt);
-//    document.getElementById('content').innerHTML = Parser.parse(Lexer.lex(src,opt),opt);
+//    return Parser.parse(Lexer.lex(src, opt), opt);
+    document.getElementById('content').innerHTML = Parser.parse(Lexer.lex(src,opt),opt);
   } catch (e) {
     e.message += '\nPlease report this to https://github.com/chjj/marked.';
     if ((opt || marked.defaults).silent) {

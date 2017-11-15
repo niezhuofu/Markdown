@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Markdown</string>
+    <string name="home_editor_title">标题</string>
+    <string name="home_editor_content">内容信息&#8230;</string>
+
+
 </resources>

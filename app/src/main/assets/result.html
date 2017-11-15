@@ -1031,23 +1031,12 @@ body .markdown-body
 <article id="content" class="markdown-body"></article>
 <script type="text/javascript">
         function parseMarkdown(content, gfmEnabled) {
-            marked.setOptions({
-                renderer: new marked.Renderer(),
-                gfm: gfmEnabled,
-                tables: true,
-                breaks: false,
-                pedantic: false,
-                sanitize: true,
-                smartLists: true,
-                smartypants: false
-            });
-            document.getElementById('content').innerHTML = marked(content);
+            marked(content);
             parseDone();
         }
         function parseDone() {
             window.handler.onHTMLGenerated();
         }
-
     </script>
 </body>
 </html>

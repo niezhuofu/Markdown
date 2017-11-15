@@ -1,11 +1,13 @@
 package com.nzf.markdown.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.webkit.*
 import android.widget.Toast
+import com.nzf.markdown.ui.editor.EditorActivity
 import com.nzf.markdown.ui.fragment.BigViewerFragment
 import com.nzf.markdown.web.ConstantWeb
 import com.nzf.markdown.web.ResultWebViewActivity
@@ -30,6 +32,7 @@ class WebMarkView : WebView{
         @JavascriptInterface
         fun show(img : String?){
             if(context is ResultWebViewActivity){
+                (context as ResultWebViewActivity).startActivity(Intent(context,EditorActivity :: class.java))
                 val bigViewer = BigViewerFragment()
                 val bundle = Bundle()
                 bundle.putString(IMG_PATH,img)

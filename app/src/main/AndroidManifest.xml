@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".web.ResultWebViewActivity" />
+        <activity android:name=".ui.editor.EditorActivity" />
     </application>
 
 </manifest>
