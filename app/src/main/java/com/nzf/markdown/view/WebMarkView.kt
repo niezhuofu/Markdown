@@ -40,7 +40,6 @@ class WebMarkView : WebView{
     }
 
 
-
     private fun initData() {
         settings.defaultTextEncodingName = "UTF-8"
         settings.javaScriptEnabled = true
@@ -65,7 +64,9 @@ class WebMarkView : WebView{
     private fun checkThePage(view : WebView?,url: String?) {
         if(ConstantWeb.BLANK_PAGE_CONTAINER.equals(url)){
             Toast.makeText(context,"URL:"+ url,Toast.LENGTH_SHORT).show()
+
             view!!.loadUrl(ConstantWeb.getLoadJs(data))  //加载md解析获得的数据
+
             view.loadUrl(ConstantWeb.JS_IMAGE_CLICK_LISTENER) //js给img添加点击监听
         }
     }

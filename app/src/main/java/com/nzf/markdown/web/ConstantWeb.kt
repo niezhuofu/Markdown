@@ -25,7 +25,7 @@ object ConstantWeb {
             "})()")
 
     fun getLoadJs(data : String) : String{
-        return "javascript:marked(\'${data}\')"
+        return "javascript:parseMarkdown(\'${data}\')"
     }
 
 
