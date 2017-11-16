@@ -36,3 +36,6 @@ object ConstantWeb {
     val BLANK_PAGE_CONTAINER = "file:///android_asset/result.html"
 
 }
+
+
+//    JS和安卓互相调用以及Scheme协议完成外部链接跳转app指定页面
