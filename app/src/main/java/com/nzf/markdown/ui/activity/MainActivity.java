@@ -6,16 +6,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nzf.markdown.R;
 import com.nzf.markdown.utils.FilesUtils;
+import com.nzf.markdown.view.GLayout;
 import com.nzf.markdown.web.ResultWebViewActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GLayout.OnGListener{
+    private GLayout gLayout;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         copyAssetsToDst(this,"","");
 
+
+        tv = findViewById(R.id.tv);
+        gLayout = findViewById(R.id.glayout);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, ResultWebViewActivity.class));
+//                startActivity(new Intent(MainActivity.this, ResultWebViewActivity.class));
             }
         },1000);
     }
@@ -71,5 +82,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.gao){
+            startActivity(new Intent(MainActivity.this, ResultWebViewActivity.class));
+        }
+        return true;
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public void onScoreChange(int score) {
+        tv.setText("score:" + score);
+    }
+
+    @Override
+    public void onGameOver() {
+        Toast.makeText(this,"GAME-OVER", Toast.LENGTH_SHORT).show();
+    }
 }
