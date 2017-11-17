@@ -13,11 +13,4 @@
         android:text="Hello World!"
          />
 
-    <com.nzf.markdown.view.GLayout
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/glayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 </FrameLayout>
