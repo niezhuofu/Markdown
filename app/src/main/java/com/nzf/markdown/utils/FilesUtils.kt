@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
+import android.widget.Toast
+import com.nzf.markdown.R
 import com.nzf.markdown.app.MDApplication
 import com.nzf.markdown.bean.MDFileBean
 import org.jetbrains.annotations.NotNull
@@ -14,7 +16,6 @@ import java.io.File
  */
 class FilesUtils {
     private var mContext: Context? = null
-    var rootPath: String? = null
     var nowPath: String? = null
 
     val FILEDIR_EXTERNAL: String = "ExternalFileDir"
@@ -36,19 +37,48 @@ class FilesUtils {
         }
     }
 
+    //生成MD文件
+    fun newMDFile(pathName: String): Boolean {
+        var file: File = File(nowPath + pathName)
+
+        if (file.exists()) {
+            ToastUtils.showShort(R.string.file_exists)
+            return false
+        }
+
+        file.createNewFile()
+        return true
+    }
+
+    // 生成文件夹
+    fun mkFileDir(pathName: String): Boolean {
+        var file: File = File(nowPath + pathName)
+
+        if (file.exists()) {
+            ToastUtils.showShort(R.string.file_exists)
+            return false
+        }
+
+        if (file.mkdir()) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     /*
     * 展示所有文件
     * @params path  需要展示的路径
     * @return ArrayList<MDFileBean> 当前路径MD文件集合
     */
-    fun showAllMDDir(path: String): ArrayList<MDFileBean>? {
+    fun showAllMDDir(path: String?): ArrayList<MDFileBean>? {
         var file: File = File(path)
-        var filesList:java.util.ArrayList<MDFileBean>? = null
+
+        var filesList: java.util.ArrayList<MDFileBean>? = ArrayList<MDFileBean>()
 
         var files: Array<File> = file.listFiles()
 
         if (files.size != 0) {
-            filesList = ArrayList<MDFileBean>()
             for (f in files) {
                 var fileBean: MDFileBean? = getMDFile(f)
                 if (fileBean != null)
@@ -114,6 +144,7 @@ class FilesUtils {
                 Log.e("getFileDirectory", "getFileDirectory fail ,the reason is make directory fail !");
             }
         }
+        nowPath = mdFileDir.path
         return mdFileDir
     }
 
@@ -127,6 +158,7 @@ class FilesUtils {
         } else {
             mdFileDir = File(mContext!!.filesDir, type)
         }
+
 
         if (!mdFileDir!!.exists() && !mdFileDir!!.mkdirs()) {
             Log.i("FileUtils",
