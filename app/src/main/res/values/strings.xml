@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Markdown</string>
+
+    <string name="file_exists">文件名已存在</string>
+    <string name="file_noexists">文件删除失败：文件不存在！</string>
+    <string name="file_copy">复制文件成功!</string>
 </resources>
