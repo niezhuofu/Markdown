@@ -5,12 +5,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
-
 
     <application
         android:name=".app.MDApplication"
@@ -20,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,46 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".web.ResultWebViewActivity" />
-        <activity android:name=".ui.editor.EditorActivity" />
-
-
-
-
-
-
-
-        <!--<activity-->
-            <!--android:name=".VerticalInterstitialActivity"-->
-            <!--android:label="竖版插屏"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />-->
-
-        <!--<activity-->
-            <!--android:name=".HorizonInterstitialActivity"-->
-            <!--android:label="横版插屏"-->
-            <!--android:screenOrientation="landscape"-->
-            <!--android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />-->
-
-        <!--<activity-->
-            <!--android:name=".CustomNewsFeedActivity"-->
-            <!--android:label="自定义信息流广告"-->
-            <!--android:screenOrientation="portrait" />-->
-
-        <!--<activity-->
-            <!--android:name=".StandardNewsFeedActivity"-->
-            <!--android:label="标准信息流广告"-->
-            <!--android:screenOrientation="portrait" />-->
-
-        <!--<activity-->
-            <!--android:name=".StandardNewsFeedListActivity"-->
-            <!--android:screenOrientation="portrait" />-->
-
-        <activity
-            android:name="com.xiaomi.ad.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:exported="false"
-            android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
