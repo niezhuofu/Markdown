@@ -8,7 +8,6 @@ import android.content.res.Resources
  * Created by niezhuofu on 17-11-8.
  */
 class MDApplication : Application() {
-
     companion object {
         var mContext: Context? = null
 

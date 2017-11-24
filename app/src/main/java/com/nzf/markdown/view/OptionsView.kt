@@ -15,17 +15,18 @@ import com.nzf.markdown.R
 class OptionsView : View,View.OnTouchListener {
     private var totalWidth : Int = 0
     private var unitWidth : Float= 0f
-    private val MAX_LINE: Int = 15
-    private val linePaint = Paint()
-
     private var isWhite : Boolean = true
-    private val whiteArray : ArrayList<Point> = ArrayList()
-    private val blackArray : ArrayList<Point> = ArrayList()
+
+    private val MAX_LINE: Int by lazy { 15 }
+    private val linePaint by lazy { Paint() }
+
+    private val whiteArray : ArrayList<Point> by lazy { ArrayList<Point>() }
+    private val blackArray : ArrayList<Point> by lazy { ArrayList<Point>() }
 
     private var ratioPic = 3 * 1.0f / 4
 
-    private var whitePic : Bitmap? = null
-    private var blackPic : Bitmap? = null
+    private var whitePic : Bitmap
+    private var blackPic : Bitmap
 
     constructor(context : Context?):this(context,null)
 
