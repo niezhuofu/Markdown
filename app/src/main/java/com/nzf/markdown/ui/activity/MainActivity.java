@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
 import android.util.Log;
 
+import com.nzf.markdown.R;
 import com.nzf.markdown.utils.FilesUtils;
 import com.nzf.markdown.web.ResultWebViewActivity;
 
@@ -16,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +80,17 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.gao) {
+            startActivity(new Intent(MainActivity.this, ResultWebViewActivity.class));
+        }
+        return true;
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 }
