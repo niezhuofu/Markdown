@@ -8,7 +8,7 @@ import android.view.View
 /**
  * Created by niezhuofu on 17-11-21.
  */
-class BaseSingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+open class BaseSingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var mView: SparseArray<View>? = null
 
     init {
