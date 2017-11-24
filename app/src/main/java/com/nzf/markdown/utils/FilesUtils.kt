@@ -168,9 +168,9 @@ class FilesUtils {
         var fileName: String = f.name
 
         bean!!.fileName = f.name
-        bean!!.fileLastTime = f.lastModified()
-        bean!!.fileSize = f.length()
-        bean!!.filePath = f.path
+        bean.fileLastTime = f.lastModified()
+        bean.fileSize = f.length()
+        bean.filePath = f.path
 
         if (f.isFile) {
             var fileSuffix: String = getFileSuffix(fileName)

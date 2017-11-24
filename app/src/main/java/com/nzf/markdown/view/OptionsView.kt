@@ -8,7 +8,6 @@ import android.view.View
 import com.nzf.markdown.R
 
 
-
 /**
  * Created by joseph on 2017/11/15.
  */
