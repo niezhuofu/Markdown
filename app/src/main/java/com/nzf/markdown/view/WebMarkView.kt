@@ -1,5 +1,6 @@
 package com.nzf.markdown.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -43,6 +44,7 @@ class WebMarkView : WebView{
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initData() {
         settings.defaultTextEncodingName = "UTF-8"
         settings.javaScriptEnabled = true
@@ -52,9 +54,8 @@ class WebMarkView : WebView{
                 checkThePage(view,url)
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                return true
-            }
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean = true
+
         }
 
         webChromeClient = object : WebChromeClient(){}

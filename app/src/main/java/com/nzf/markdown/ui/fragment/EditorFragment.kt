@@ -13,14 +13,14 @@ import com.nzf.markdown.view.OptionsView
  * Created by joseph on 2017/11/15.
  */
 class EditorFragment : Fragment(){
-    var rootView : View? = null
-    var optionGroup : OptionsView? = null
-    var button : Button? = null
+   private lateinit var rootView : View
+   private lateinit var optionGroup : OptionsView
+   private lateinit var button : Button
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater!!.inflate(R.layout.fragment_home_editor,container,false)
 
-        optionGroup = rootView!!.findViewById(R.id.ovg)
+        optionGroup = rootView.findViewById(R.id.ovg)
 
         return rootView
     }
@@ -30,8 +30,8 @@ class EditorFragment : Fragment(){
         super.onActivityCreated(savedInstanceState)
         for(i in 0..5){
             button = Button(activity)
-            button!!.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            button!!.text = "佳胜${i}"
+            button.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            button.text = "佳胜${i}"
         }
     }
 

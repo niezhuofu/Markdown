@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
 import com.nzf.markdown.R
 import com.nzf.markdown.app.MDApplication
 import com.nzf.markdown.bean.MDFileBean
@@ -16,7 +15,7 @@ import java.io.*
  */
 class FilesUtils {
     private var mContext: Context? = null
-    var nowPath: String? = null
+    lateinit var nowPath: String
 
     val FILEDIR_EXTERNAL: String = "ExternalFileDir"
     val FILEDIR_INTERNAL: String = "InternalFileDir"
@@ -49,12 +48,15 @@ class FilesUtils {
             return isCreate
         }
 
-        try {
+        return try {
             isCreate = file.createNewFile()
-            return isCreate
+            if(!isCreate){
+                ToastUtils.showShort(R.string.file_exists)
+            }
+            isCreate
         } catch (e: IOError) {
-            ToastUtils.showShort(R.string.file_exists)
-            return false
+            ToastUtils.showShort("Invalid file path")
+            false
         }
     }
 

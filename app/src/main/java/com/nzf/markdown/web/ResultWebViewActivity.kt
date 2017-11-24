@@ -14,13 +14,13 @@ class ResultWebViewActivity : AppCompatActivity(),ViewTreeObserver.OnGlobalLayou
 
     private var isFirst : Boolean = true
 
-    private var mWebView : WebMarkView? = null
+    private lateinit var mWebView : WebMarkView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mWebView = WebMarkView(this)
         setContentView(mWebView)
-        mWebView!!.addJavascriptInterface(WebMarkView.AndroidToast(this),"AndroidToast")
+        mWebView.addJavascriptInterface(WebMarkView.AndroidToast(this),"AndroidToast")
     }
 
     override fun onResume() {
@@ -29,19 +29,19 @@ class ResultWebViewActivity : AppCompatActivity(),ViewTreeObserver.OnGlobalLayou
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        mWebView!!.viewTreeObserver.addOnGlobalLayoutListener(this)
+        mWebView.viewTreeObserver.addOnGlobalLayoutListener(this)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        mWebView!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        mWebView.viewTreeObserver.removeOnGlobalLayoutListener(this)
     }
 
 
     override fun onGlobalLayout() {
           if(isFirst){
-              mWebView!!.data = WebMarkView.formatFileData(Environment.getExternalStorageDirectory().absolutePath + "/README.md")
-              mWebView!!.loadDefault()
+              mWebView.data = WebMarkView.formatFileData(Environment.getExternalStorageDirectory().absolutePath + "/README.md")
+              mWebView.loadDefault()
               isFirst = false
           }
 

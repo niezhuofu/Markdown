@@ -15,11 +15,11 @@ import com.nzf.markdown.view.WebMarkView
  * Created by joseph on 2017/11/14.
  */
 class BigViewerFragment : DialogFragment(){
-    var image_path : String? = null
+    lateinit private var imagePath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStyle(DialogFragment.STYLE_NO_TITLE,android.R.style.Theme_Light_NoTitleBar_Fullscreen)
-        image_path = arguments.getString(WebMarkView.IMG_PATH)
+        imagePath = arguments.getString(WebMarkView.IMG_PATH)
 
         super.onCreate(savedInstanceState)
     }
@@ -33,7 +33,7 @@ class BigViewerFragment : DialogFragment(){
         val image = view!!.findViewById<ImageView>(R.id.iv_img)
 
         Glide.with(this)
-                .load(image_path)
+                .load(imagePath)
                 .placeholder(R.mipmap.ic_launcher)
                 .into(image)
 
