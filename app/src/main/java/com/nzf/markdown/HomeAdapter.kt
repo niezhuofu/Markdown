@@ -49,7 +49,7 @@ class HomeAdapter(mContext: Context?, mLayoutRes: Int?, mList: List<MDFileBean>?
            }
 
         }
-        
+
     }
 
 }
