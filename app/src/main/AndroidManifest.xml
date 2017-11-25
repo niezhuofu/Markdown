@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".web.ResultWebViewActivity" />
         <activity android:name=".MainActivity"/>
+
+        <activity android:name=".test.activity.TestActivity"/>
     </application>
 
 </manifest>
