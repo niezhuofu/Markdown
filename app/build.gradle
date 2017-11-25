@@ -41,9 +41,6 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerview"]
 
     implementation rootProject.ext.dependencies["glide"]
-    implementation rootProject.ext.dependencies["dagger2"]
-    implementation rootProject.ext.dependencies["dagger2-android"]
-    kapt rootProject.ext.dependencies["dagger2-compiler"]
 }
 repositories {
     mavenCentral()
