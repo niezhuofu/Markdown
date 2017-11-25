@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:paddingLeft="20dp"
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:inputType="text"
+        android:lines="1"
+        android:hint="@string/home_editor_title"
+        android:textSize="20sp"
+        />
+
+
+    <!--<EditText-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="top"-->
+        <!--android:id="@+id/et_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:inputType="textLongMessage|textMultiLine"-->
+        <!--android:hint="@string/home_editor_content"-->
+        <!--android:background="@null"-->
+        <!--/>-->
+
+    <com.nzf.markdown.view.OptionsView
+        android:layout_marginTop="80dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/ovg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>
