@@ -21,7 +21,7 @@ class MkDBHelper(name: String?,version: Int)
         @SuppressLint("StaticFieldLeak")
         var dbHelper : MkDBHelper? = null
 
-        fun getInstance(){
+        fun getInstance() : MkDBHelper{
             if(dbHelper == null){
                 synchronized(MkDBHelper:: class.java.simpleName){
                     if(dbHelper == null){
@@ -29,12 +29,13 @@ class MkDBHelper(name: String?,version: Int)
                     }
                 }
             }
+            return dbHelper!!
         }
     }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        super.onCreate(db)
-        db!!.execSQL(SQL_DOWNLOAD)
+    override fun onCreate(p0: SQLiteDatabase?) {
+        super.onCreate(p0)
+        p0!!.execSQL(SQL_DOWNLOAD)
 
     }
 

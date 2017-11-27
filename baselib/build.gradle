@@ -29,8 +29,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies["appcompat-v7"]
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation files('libs/sqlcipher.jar')
-    implementation files('libs/commons-codec.jar')
+    api files('libs/sqlcipher.jar')
+    api files('libs/commons-codec.jar')
 }
 repositories {
     mavenCentral()
