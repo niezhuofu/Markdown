@@ -1,5 +1,4 @@
 def supportVersion = "26.1.0"
-def dagger2Version = "2.12"
 def glideVersion = "3.7.0"
 def constraintVersion = "1.0.2"
 
