@@ -37,7 +37,6 @@ dependencies {
     implementation rootProject.ext.dependencies["cardview"]
     implementation rootProject.ext.dependencies["recyclerview"]
     implementation rootProject.ext.dependencies["glide"]
-    implementation files('libs/sqlcipher.jar')
     implementation project(':baselib')
 }
 repositories {

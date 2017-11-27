@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 26
@@ -25,7 +26,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies["appcompat-v7"]
-
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation files('libs/sqlcipher.jar')
+    implementation files('libs/commons-codec.jar')
+}
+repositories {
+    mavenCentral()
 }
