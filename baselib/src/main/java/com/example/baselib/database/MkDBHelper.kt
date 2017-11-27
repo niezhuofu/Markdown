@@ -1,4 +1,4 @@
-package com.nzf.markdown.test.activity.database
+package com.example.baselib.database
 
 import android.annotation.SuppressLint
 import net.sqlcipher.database.SQLiteDatabase
@@ -16,14 +16,14 @@ class MkDBHelper(name: String?,version: Int)
 
         val TABLE_DOWNLOAD_FILE = "file_download"
 
-        val SQL_DOWNLOAD = "create table if not exists ${ TABLE_DOWNLOAD_FILE}(_id integer primary key autoincrement,id integer not null,url text not null,progress text not null,length text not null,_extra1 text default(''),_extra2 text default('')"
+        val SQL_DOWNLOAD = "create table if not exists ${TABLE_DOWNLOAD_FILE}(_id integer primary key autoincrement,id integer not null,url text not null,progress text not null,length text not null,_extra1 text default(''),_extra2 text default('')"
 
         @SuppressLint("StaticFieldLeak")
         var dbHelper : MkDBHelper? = null
 
         fun getInstance(){
             if(dbHelper == null){
-                synchronized(MkDBHelper :: class.java.simpleName){
+                synchronized(MkDBHelper:: class.java.simpleName){
                     if(dbHelper == null){
                         dbHelper = MkDBHelper(DB_DOWNLOAD, DB_VERSION)
                     }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.nzf.markdown.R
-import com.nzf.markdown.test.activity.httpconnect.HttpUrlUtils
 
 /**
  * Created by niezhuofu on 17-11-25.
@@ -20,7 +19,7 @@ class TestActivity : AppCompatActivity() {
 
         Thread(Runnable {
 
-          HttpUrlUtils.Companion.HttpBuilder.builder()
+//          HttpUrlUtils.Companion.HttpBuilder.builder()
 
 //            run {
 //                while(true){

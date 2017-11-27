@@ -1,4 +1,4 @@
-package com.nzf.markdown.test.activity.httpconnect
+package com.example.baselib.httpconnect
 
 
 import java.util.concurrent.LinkedBlockingQueue
@@ -15,13 +15,13 @@ class ThreadManager {
     companion object {
         private var poolProxy : ThreadPoolProxy? = null
 
-        fun getProxy() : ThreadPoolProxy{
+        fun getProxy() : ThreadPoolProxy {
             if(poolProxy == null){
-                synchronized(ThreadManager :: class.java.simpleName){
+                synchronized(ThreadManager:: class.java.simpleName){
                     if(poolProxy == null){
                         val processCount = Runtime.getRuntime().availableProcessors()
                         val maxAvailable = Math.max(processCount,8)
-                        poolProxy = ThreadPoolProxy(processCount,maxAvailable,5)
+                        poolProxy = ThreadPoolProxy(processCount, maxAvailable, 5)
                     }
                 }
             }
@@ -39,7 +39,7 @@ class ThreadManager {
 
             fun execute(runnable: Runnable){
                 if(threadPoolExecutor == null || threadPoolExecutor!!.isShutdown){
-                     synchronized(ThreadManager :: class.java.simpleName){
+                     synchronized(ThreadManager:: class.java.simpleName){
                          if(threadPoolExecutor == null || threadPoolExecutor!!.isShutdown){
                               threadPoolExecutor = createExecutor()
                               threadPoolExecutor!!.allowCoreThreadTimeOut(false)
@@ -51,7 +51,7 @@ class ThreadManager {
 
             private fun createExecutor() : ThreadPoolExecutor = ThreadPoolExecutor(corePoolSize,
                   maximumPoolSize,keepAliveTime,TimeUnit.SECONDS,LinkedBlockingQueue<Runnable>(),
-                  DefaultThreadFactory(Thread.NORM_PRIORITY, "markdown-pool"),
+                    DefaultThreadFactory(Thread.NORM_PRIORITY, "markdown-pool"),
                   ThreadPoolExecutor.AbortPolicy())
         }
 

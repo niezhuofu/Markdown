@@ -1,4 +1,4 @@
-package com.nzf.markdown.test.activity.httpconnect
+package com.example.baselib.httpconnect
 
 import android.util.Log
 import java.io.BufferedOutputStream
@@ -18,7 +18,7 @@ class HttpUrlUtils {
         private val TYPE_GET = 101
         private val TYPE_POST = 202
 
-        fun doGet(httpBuilder : HttpBuilder,callback:HttpUrlCallBack) {
+        fun doGet(httpBuilder : HttpBuilder, callback: HttpUrlCallBack) {
             val conn = URL(httpBuilder.getParams(TYPE_GET)).openConnection() as HttpURLConnection
             conn.requestMethod = "GET"
             conn.connectTimeout = 5000
@@ -42,7 +42,7 @@ class HttpUrlUtils {
         }
 
 
-        fun doPost(httpBuilder: HttpBuilder,callback:HttpUrlCallBack){
+        fun doPost(httpBuilder: HttpBuilder, callback: HttpUrlCallBack){
             val conn = URL(httpBuilder.getUrlLink()).openConnection() as HttpURLConnection
             conn.requestMethod = "POST"
             conn.connectTimeout = 5000
@@ -92,12 +92,12 @@ class HttpUrlUtils {
 
             fun getUrlLink() : String = urlLink!!
 
-            fun setUrlLink(urlLink : String):HttpBuilder{
+            fun setUrlLink(urlLink : String): HttpBuilder {
                 this.urlLink = urlLink
                 return this
             }
 
-           fun setHeaders(headers : HashMap<String,String>):HttpBuilder {
+           fun setHeaders(headers : HashMap<String,String>): HttpBuilder {
                this.headers = headers
                return this
            }
@@ -108,14 +108,14 @@ class HttpUrlUtils {
                }
            }
 
-           fun setParams(params : HashMap<String,String>):HttpBuilder{
+           fun setParams(params : HashMap<String,String>): HttpBuilder {
                this.params = params
                return this
            }
 
            fun getParams(requestType : Int) : String{
                when(requestType){
-                   TYPE_GET->{            //--------------------GET---------------------
+                   TYPE_GET ->{            //--------------------GET---------------------
                        var isFirst = true
 
                        for ((k,v) in params!!){
@@ -129,7 +129,7 @@ class HttpUrlUtils {
                        urlLink = urlLink!!.substring(0,urlLink!!.length - 1)
                        return urlLink!!
                    }
-                   TYPE_POST->{           //-------------------POST----------------------
+                   TYPE_POST ->{           //-------------------POST----------------------
                        for((k,v) in params!!){
                            urlLink = "$urlLink$k=$v&"
                        }
