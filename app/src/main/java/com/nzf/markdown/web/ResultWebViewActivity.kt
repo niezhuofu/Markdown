@@ -2,15 +2,15 @@ package com.nzf.markdown.web
 
 import android.os.Bundle
 import android.os.Environment
-import android.support.v7.app.AppCompatActivity
 import android.view.ViewTreeObserver
+import androidx.fragment.app.FragmentActivity
 import com.nzf.markdown.view.WebMarkView
 
 /**
  * Created by joseph on 2017/11/11.
  */
 
-class ResultWebViewActivity : AppCompatActivity(),ViewTreeObserver.OnGlobalLayoutListener{
+class ResultWebViewActivity : FragmentActivity(),ViewTreeObserver.OnGlobalLayoutListener{
 
     private var isFirst : Boolean = true
 

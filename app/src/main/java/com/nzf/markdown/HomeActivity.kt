@@ -1,38 +1,37 @@
 package com.nzf.markdown
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nzf.markdown.bean.MDFileBean
+import com.nzf.markdown.databinding.ActivityHomeBinding
 import com.nzf.markdown.utils.FilesUtils
-import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * Created by niezhuofu on 17-11-15.
  */
-class HomeActivity: AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
-
+    private lateinit var mHomeBinding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        mHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(mHomeBinding.root)
         initView()
     }
 
-    fun initView(){
-        var llm: LinearLayoutManager = LinearLayoutManager(this)
-        llm.orientation = LinearLayout.VERTICAL
-        rv_home_list.layoutManager = llm
+    private fun initView() {
+        val llm = LinearLayoutManager(this)
+        llm.orientation = LinearLayoutManager.VERTICAL
+        mHomeBinding.rvHomeList.layoutManager = llm
 
         initAdapter()
-        }
+    }
 
-    fun initAdapter(){
-        var fileUtils = FilesUtils.instance
-        var path = fileUtils.getFileDirectory(fileUtils.FILEDIR_EXTERNAL,null)
-        var list : List<MDFileBean>? = fileUtils.showAllMDDir(path!!.path)!!
+    private fun initAdapter() {
+        val path = FilesUtils.getFileDirectory(FilesUtils.FILEDIR_EXTERNAL, null)
+        val list : List<MDFileBean> = FilesUtils.showAllMDDir(path?.path ?: "")
 
     }
 }

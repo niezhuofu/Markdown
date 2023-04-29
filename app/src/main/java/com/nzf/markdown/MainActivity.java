@@ -1,23 +1,19 @@
 package com.nzf.markdown;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.util.Log;
 
-import com.nzf.markdown.R;
 import com.nzf.markdown.utils.FilesUtils;
 import com.nzf.markdown.web.ResultWebViewActivity;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tv;
@@ -41,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        String path = FilesUtils.Companion.getInstance().getFileDirectory(FilesUtils.Companion.getInstance().getFILEDIR_EXTERNAL(), "b").getPath();
+        File file = FilesUtils.INSTANCE.getFileDirectory(FilesUtils.FILEDIR_EXTERNAL, "b");
+        String path = "";
+        if (file != null) {
+            path = file.getPath();
+        }
         Log.i("MainActivity", "path:" + path);
 //        FilesUtils.Companion.getInstance().showAllMDDir(path);
 

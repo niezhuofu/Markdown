@@ -2,7 +2,7 @@ package com.nzf.markdown.test.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.nzf.markdown.R
 
 /**

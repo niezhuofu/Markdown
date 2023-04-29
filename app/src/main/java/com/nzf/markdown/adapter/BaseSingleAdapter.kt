@@ -1,7 +1,7 @@
 package com.nzf.markdown.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by niezhuofu on 17-11-21.

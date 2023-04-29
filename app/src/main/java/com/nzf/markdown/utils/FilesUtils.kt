@@ -13,30 +13,28 @@ import java.io.*
 /**
  * Created by niezhuofu on 17-11-7.
  */
-class FilesUtils {
-    private var mContext: Context? = null
+object FilesUtils {
     lateinit var nowPath: String
 
-    val FILEDIR_EXTERNAL: String = "ExternalFileDir"
-    val FILEDIR_INTERNAL: String = "InternalFileDir"
+    const val FILE_MD: String = ".md"
+    const val FILE_HTML: String = ".html"
+    const val FILEDIR_EXTERNAL: String = "ExternalFileDir"
+    const val FILEDIR_INTERNAL: String = "InternalFileDir"
 
 
-    constructor() {
-        mContext = MDApplication.getContext()
-    }
+//    constructor() {
+//        mContext = MDApplication.getContext()
+//    }
 
-    companion object {
-
-        val FILE_MD: String = ".md"
-        val FILE_HTML: String = ".html"
-
-        val instance: FilesUtils
-            get() = SingletonHolder.INSTANCE
-
-        private object SingletonHolder {
-            val INSTANCE = FilesUtils()
-        }
-    }
+//    companion object {
+//
+//
+//
+//        @JvmStatic
+//        val instance: FilesUtils
+//            get() = FilesUtils()
+//
+//    }
 
     //生成MD文件
     fun newMDFile(pathName: String): Boolean {
@@ -50,7 +48,7 @@ class FilesUtils {
 
         return try {
             isCreate = file.createNewFile()
-            if(!isCreate){
+            if (!isCreate) {
                 ToastUtils.showShort(R.string.file_exists)
             }
             isCreate
@@ -138,18 +136,18 @@ class FilesUtils {
      * @param path  需要展示的路径
      * @return ArrayList<MDFileBean> 当前路径MD文件集合
      */
-    fun showAllMDDir(path: String?): ArrayList<MDFileBean>? {
-        var file: File = File(path)
+    fun showAllMDDir(path: String): ArrayList<MDFileBean> {
+        val file: File = File(path)
 
-        var filesList: java.util.ArrayList<MDFileBean>? = ArrayList<MDFileBean>()
+        val filesList: ArrayList<MDFileBean> = ArrayList()
 
-        var files: Array<File> = file.listFiles()
+        val files: Array<File> = file.listFiles()
 
-        if (files.size != 0) {
+        if (files.isNotEmpty()) {
             for (f in files) {
-                var fileBean: MDFileBean? = getMDFile(f)
+                val fileBean: MDFileBean? = getMDFile(f)
                 if (fileBean != null)
-                    filesList!!.add(fileBean)
+                    filesList.add(fileBean)
             }
         }
 
@@ -271,15 +269,24 @@ class FilesUtils {
         }
 
         if (mdFileDir == null) {
-            Log.i("getFileDirectory", "getExternalFileDirectory fail,the reason is sdCard nonexistence or sdCard mount fail !")
+            Log.i(
+                "getFileDirectory",
+                "getExternalFileDirectory fail,the reason is sdCard nonexistence or sdCard mount fail !"
+            )
             mdFileDir = getInternalFileDirectory(type)
         }
 
         if (mdFileDir == null) {
-            Log.e("getFileDirectory", "getFileDirectory fail ,the reason is mobile phone unknown exception !");
+            Log.e(
+                "getFileDirectory",
+                "getFileDirectory fail ,the reason is mobile phone unknown exception !"
+            );
         } else {
             if (!mdFileDir.exists() && !mdFileDir.mkdirs()) {
-                Log.e("getFileDirectory", "getFileDirectory fail ,the reason is make directory fail !");
+                Log.e(
+                    "getFileDirectory",
+                    "getFileDirectory fail ,the reason is make directory fail !"
+                );
             }
         }
         nowPath = mdFileDir.path
@@ -292,15 +299,17 @@ class FilesUtils {
     fun getInternalFileDirectory(type: String?): File {
         var mdFileDir: File? = null
         if (TextUtils.isEmpty(type)) {
-            mdFileDir = mContext!!.filesDir
+            mdFileDir = MDApplication.getContext()!!.filesDir
         } else {
-            mdFileDir = File(mContext!!.filesDir, type)
+            mdFileDir = File(MDApplication.getContext()!!.filesDir, type)
         }
 
 
         if (!mdFileDir!!.exists() && !mdFileDir!!.mkdirs()) {
-            Log.i("FileUtils",
-                    "getInternalDirectory fail ,the reason is make directory fail !")
+            Log.i(
+                "FileUtils",
+                "getInternalDirectory fail ,the reason is make directory fail !"
+            )
         }
         return mdFileDir
     }
@@ -312,12 +321,15 @@ class FilesUtils {
         var mdFileDir: File? = null
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             if (TextUtils.isEmpty(type)) {
-                mdFileDir = mContext!!.getExternalFilesDir(null)
+                mdFileDir = MDApplication.getContext()!!.getExternalFilesDir(null)
             } else {
-                mdFileDir = mContext!!.getExternalFilesDir(type)
+                mdFileDir = MDApplication.getContext()!!.getExternalFilesDir(type)
             }
         } else {
-            Log.i("FileUtils", "getExternalDirectory fail ,the reason is sdCard nonexistence or sdCard mount fail !")
+            Log.i(
+                "FileUtils",
+                "getExternalDirectory fail ,the reason is sdCard nonexistence or sdCard mount fail !"
+            )
         }
         return mdFileDir
     }

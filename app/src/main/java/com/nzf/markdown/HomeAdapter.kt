@@ -1,7 +1,7 @@
 package com.nzf.markdown
 
 import android.content.Context
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ class HomeAdapter(mContext: Context?, mLayoutRes: Int?, mList: List<MDFileBean>?
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFileHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeFileHolder =
             HomeFileHolder.get(mContext,R.layout.activity_home_editor,parent)
 
 

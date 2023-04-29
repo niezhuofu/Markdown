@@ -1,6 +1,7 @@
 package com.nzf.markdown.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.webkit.*
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import com.nzf.markdown.ui.editor.EditorActivity
 import com.nzf.markdown.ui.fragment.BigViewerFragment
 import com.nzf.markdown.web.ConstantWeb
@@ -18,27 +20,39 @@ import java.io.File
  * Created by joseph on 2017/11/11.
  */
 
-class WebMarkView : WebView{
-    constructor(context : Context?) : this(context,null)
+class WebMarkView : WebView {
+    constructor(context: Context) : this(context, null)
 
-    constructor(context : Context?,attrs : AttributeSet?) : this(context,attrs,0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context : Context?,attrs: AttributeSet?,defStyle:Int):super(context,attrs,defStyle){
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         initData()
     }
 
     class AndroidToast(context: Context) {
-        private var context : Context? = context
+        private var context: Context? = context
 
         @JavascriptInterface
-        fun show(img : String?){
-            if(context is ResultWebViewActivity){
-                (context as ResultWebViewActivity).startActivity(Intent(context,EditorActivity :: class.java))
+        fun show(img: String?) {
+            if (context is ResultWebViewActivity) {
+                (context as ResultWebViewActivity).startActivity(
+                    Intent(
+                        context,
+                        EditorActivity::class.java
+                    )
+                )
                 val bigViewer = BigViewerFragment()
                 val bundle = Bundle()
-                bundle.putString(IMG_PATH,img)
+                bundle.putString(IMG_PATH, img)
                 bigViewer.arguments = bundle
-                bigViewer.show((context as ResultWebViewActivity).fragmentManager,"jia")
+                if (context == null) {
+                    return
+                }
+                bigViewer.show((context as FragmentActivity).supportFragmentManager, "jia")
             }
         }
     }
@@ -51,23 +65,26 @@ class WebMarkView : WebView{
 
         webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                checkThePage(view,url)
+                checkThePage(view, url)
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean = true
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean = true
 
         }
 
-        webChromeClient = object : WebChromeClient(){}
+        webChromeClient = object : WebChromeClient() {}
 
     }
 
     /**
      * 校验加载完成的页面,进行相应的js注入操作
      */
-    private fun checkThePage(view : WebView?,url: String?) {
-        if(ConstantWeb.BLANK_PAGE_CONTAINER.equals(url)){
-            Toast.makeText(context,"URL:"+ url,Toast.LENGTH_SHORT).show()
+    private fun checkThePage(view: WebView?, url: String?) {
+        if (ConstantWeb.BLANK_PAGE_CONTAINER.equals(url)) {
+            Toast.makeText(context, "URL:" + url, Toast.LENGTH_SHORT).show()
 
             view!!.loadUrl(ConstantWeb.getLoadJs(data))  //加载md解析获得的数据
 
@@ -75,12 +92,14 @@ class WebMarkView : WebView{
         }
     }
 
-    var data : String = ""
+    var data: String = ""
 
     override fun onSizeChanged(w: Int, h: Int, ow: Int, oh: Int) {
         super.onSizeChanged(w, h, ow, oh)
-        val changeY = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f,
-                resources.displayMetrics).toInt()
+        val changeY = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, 100f,
+            resources.displayMetrics
+        ).toInt()
         if (h > 0 && h - oh > changeY) {
             loadUrl(ConstantWeb.JS_KEYBOARD_UP)
         } else if (h > 0 && oh - h > changeY) {
@@ -94,14 +113,12 @@ class WebMarkView : WebView{
         /**
          * 对读取到的源文件格式化
          */
-        fun formatFileData(filename : String) : String{
+        fun formatFileData(filename: String): String {
             val sb = StringBuilder()
-            File(filename).useLines { lines -> lines.forEach { sb.append(it).append("\\n")} }
+            File(filename).useLines { lines -> lines.forEach { sb.append(it).append("\\n") } }
 
             return sb.toString()
-                    .replace("\"","\\"+"\"").
-                    replace("\'","\\"+"\'").
-                    replace("//","\\/\\/")
+                .replace("\"", "\\" + "\"").replace("\'", "\\" + "\'").replace("//", "\\/\\/")
         }
 
         val IMG_PATH = "imagePath"
@@ -109,7 +126,7 @@ class WebMarkView : WebView{
     }
 
 
-    fun loadDefault(){
+    fun loadDefault() {
         loadUrl(ConstantWeb.BLANK_PAGE_CONTAINER)
     }
 
